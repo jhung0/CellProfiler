@@ -27,6 +27,7 @@ import skimage
 import skimage.measure
 
 import cellprofiler.module
+import cellprofiler.setting
 
 
 class ConvertImageToObjects(cellprofiler.module.ImageSegmentation):
@@ -36,7 +37,45 @@ class ConvertImageToObjects(cellprofiler.module.ImageSegmentation):
 
     variable_revision_number = 1
 
+    def create_settings(self):
+        super(ConvertImageToObjects, self).create_settings()
+
+        self.background_label = cellprofiler.setting.Integer(
+            "Background label",
+            value=0
+        )
+
+        self.connectivity = cellprofiler.setting.Integer(
+            "Connectivity",
+            minval=1,
+            value=1
+        )
+
+    def settings(self):
+        settings = super(ConvertImageToObjects, self).settings()
+
+        settings += [
+            self.background_label,
+            self.connectivity
+        ]
+
+        return settings
+
+    def visible_settings(self):
+        visible_settings = super(ConvertImageToObjects, self).visible_settings()
+
+        visible_settings += [
+            self.background_label,
+            self.connectivity
+        ]
+
+        return visible_settings
+
     def run(self, workspace):
-        self.function = lambda(x_data): skimage.measure.label(skimage.img_as_bool(x_data))
+        self.function = lambda x_data, background_label, connectivity: skimage.measure.label(
+            skimage.img_as_bool(x_data),
+            background=background_label,
+            connectivity=connectivity
+        )
 
         super(ConvertImageToObjects, self).run(workspace)
