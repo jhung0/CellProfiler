@@ -67,11 +67,16 @@ class SaveCroppedObjects(cellprofiler.module.Module):
 
         filenames = []
 
+        directory = self.directory.get_absolute_path(workspace.measurements)
+
+        if not os.path.exists(directory):
+            os.makedirs(directory)
+
         for label in unique_labels:
             mask = labels == label
 
             filename = os.path.join(
-                self.directory.get_absolute_path(),
+                directory,
                 "{}_{:04d}_{}.tiff".format(self.objects_name.value, label, int(time.time()))
             )
 
