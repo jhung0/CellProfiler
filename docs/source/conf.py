@@ -18,13 +18,13 @@
 #
 import os
 import sys
-import unittest.mock
+import mock
 
 
 sys.path.insert(0, os.path.abspath(os.path.join("..", "..")))
 
 # http://docs.readthedocs.io/en/latest/faq.html#i-get-import-errors-on-libraries-that-depend-on-c-modules
-class Mock(unittest.mock.MagicMock):
+class Mock(mock.MagicMock):
     @classmethod
     def __getattr__(cls, name):
             return MagicMock()
