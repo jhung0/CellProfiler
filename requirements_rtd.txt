@@ -1,0 +1,17 @@
+centrosome
+docutils
+h5py
+inflect
+joblib
+mahotas
+matplotlib>=2.0.0, !=2.1.0
+MySQL-python
+numpy
+prokaryote==2.3.1
+python-bioformats==1.3.1
+pyzmq==15.3.0
+raven
+requests
+scikit-image
+scikit-learn
+scipy

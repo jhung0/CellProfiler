@@ -18,9 +18,19 @@
 #
 import os
 import sys
+import unittest.mock
+
 
 sys.path.insert(0, os.path.abspath(os.path.join("..", "..")))
 
+# http://docs.readthedocs.io/en/latest/faq.html#i-get-import-errors-on-libraries-that-depend-on-c-modules
+class Mock(unittest.mock.MagicMock):
+    @classmethod
+    def __getattr__(cls, name):
+            return MagicMock()
+
+MOCK_MODULES = ['javabridge']
+sys.modules.update((mod_name, Mock()) for mod_name in MOCK_MODULES)
 
 # -- General configuration ------------------------------------------------
 
