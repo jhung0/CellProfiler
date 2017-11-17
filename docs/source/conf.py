@@ -29,7 +29,7 @@ class Mock(unittest.mock.MagicMock):
     def __getattr__(cls, name):
             return MagicMock()
 
-MOCK_MODULES = ['javabridge']
+MOCK_MODULES = ['bioformats', 'javabridge']
 sys.modules.update((mod_name, Mock()) for mod_name in MOCK_MODULES)
 
 # -- General configuration ------------------------------------------------
