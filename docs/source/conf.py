@@ -29,7 +29,7 @@ class Mock(mock.MagicMock):
     def __getattr__(cls, name):
         return mock.MagicMock()
 
-MOCK_MODULES = ['bioformats', 'bioformats.omexml', 'javabridge']
+MOCK_MODULES = ['bioformats', 'bioformats.formatreader', 'bioformats.formatwriter', 'bioformats.omexml', 'javabridge']
 sys.modules.update((mod_name, Mock()) for mod_name in MOCK_MODULES)
 
 # -- General configuration ------------------------------------------------
