@@ -27,7 +27,7 @@ sys.path.insert(0, os.path.abspath(os.path.join("..", "..")))
 class Mock(mock.MagicMock):
     @classmethod
     def __getattr__(cls, name):
-            return MagicMock()
+        return mock.MagicMock()
 
 MOCK_MODULES = ['bioformats', 'bioformats.omexml', 'javabridge']
 sys.modules.update((mod_name, Mock()) for mod_name in MOCK_MODULES)
